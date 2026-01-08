@@ -2,13 +2,14 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Mi Pan de Dios :b</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Alexandra ❤️</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600;800&display=swap');
 
         :root {
             --rosa-fuerte: #ff0a54;
+            --blanco-puro: #ffffff;
         }
 
         body {
@@ -18,129 +19,101 @@
             background-attachment: fixed;
             font-family: 'Poppins', sans-serif;
             margin: 0;
-            padding: 10px;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow-x: hidden;
+            color: var(--blanco-puro);
         }
 
+        /* Contenedor principal ajustado para móvil */
         .main-container {
-            /* FONTO MÁS BLANCO PARA QUE EL TEXTO RESALTE */
-            background: rgba(255, 255, 255, 0.98); 
-            display: flex;
-            flex-direction: row;
-            border-radius: 25px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-            max-width: 850px;
-            width: 95%;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-        }
-
-        .visual-side {
-            width: 40%;
+            background: rgba(0, 0, 0, 0.65); /* Fondo oscuro para que la letra blanca brille */
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            background: #fff5f7;
-            border-right: 3px dashed var(--rosa-fuerte);
+            width: 100%;
+            max-width: 500px; /* Tamaño ideal para móvil */
+            min-height: 100vh;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        /* Sección de fotos */
+        .visual-side {
+            padding: 20px 10px;
+            text-align: center;
+            border-bottom: 2px dashed var(--rosa-fuerte);
         }
 
         .photo-stack {
             display: flex;
-            flex-direction: column;
-            gap: 12px;
-            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
         .user-photo {
-            width: 140px; 
-            height: 140px;
+            width: 100px;
+            height: 100px;
             object-fit: cover;
-            border-radius: 12px;
-            border: 4px solid white;
-            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            border-radius: 50%; /* Fotos circulares para ahorrar espacio lateral */
+            border: 3px solid var(--rosa-fuerte);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
+        /* Sección del Poema - Mejorada para legibilidad */
         .poem-side {
-            width: 60%;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            padding: 30px 20px;
             text-align: center;
-            /* AQUÍ ESTÁ EL TRUCO: COLOR NEGRO PURO */
-            color: #000000 !important; 
+            box-sizing: border-box;
         }
 
         h1 {
             font-family: 'Dancing Script', cursive;
             color: var(--rosa-fuerte);
-            font-size: 3.2rem;
-            margin: 0 0 15px 0;
+            font-size: 3.5rem;
+            margin: 0 0 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
         .stanza {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             line-height: 1.6;
-            /* TEXTO MUCHO MÁS GRUESO Y NEGRO */
-            font-weight: 700; 
-            font-size: 1.1rem;
-            color: #000000;
+            font-size: 1.2rem;
+            font-weight: 600;
+            /* Sombra de texto para que el blanco sea legible siempre */
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8), -1px -1px 3px rgba(0,0,0,0.8);
         }
 
         .lyrics-box {
-            background: #ffeef2;
-            border-left: 5px solid var(--rosa-fuerte);
-            padding: 15px;
+            background: rgba(255, 10, 84, 0.2);
+            border-radius: 15px;
+            padding: 20px;
             margin: 20px 0;
             font-style: italic;
-            font-weight: 600;
-            color: #111;
-            border-radius: 8px;
+            font-size: 1rem;
+            border: 1px solid var(--rosa-fuerte);
         }
 
+        /* Resaltado en rosa pero legible */
         strong { 
-            color: var(--rosa-fuerte); 
+            color: #ff85a1; 
             font-weight: 800;
-            text-decoration: underline;
+            text-shadow: 1px 1px 2px rgba(0,0,0,1);
         }
 
-        /* --- FIX PARA CELULAR --- */
-        @media (max-width: 768px) {
-            .main-container {
-                flex-direction: column;
-                width: 95%;
-                margin: 20px auto;
-            }
+        .footer-text {
+            color: var(--rosa-fuerte);
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
 
-            .visual-side {
-                width: 100%;
-                border-right: none;
-                border-bottom: 3px dashed var(--rosa-fuerte);
-            }
-
-            .photo-stack {
-                flex-direction: row;
-                justify-content: center;
-            }
-
-            .user-photo {
-                width: 80px;
-                height: 80px;
-            }
-
-            .poem-side {
-                width: 100%;
-                padding: 30px 15px;
-            }
-
+        /* Ajustes para pantallas muy pequeñas */
+        @media (max-width: 380px) {
             h1 { font-size: 2.8rem; }
-            .stanza { font-size: 1.1rem; }
+            .stanza { font-size: 1.05rem; }
         }
     </style>
 </head>
@@ -153,25 +126,26 @@
                 <img src="foto3.jpg" alt="Alexandra 2" class="user-photo">
                 <img src="foto4.jpg" alt="Alexandra 3" class="user-photo">
             </div>
-            <p style="margin-top: 15px; color: var(--rosa-fuerte); font-weight: bold; font-size: 1rem;">
-                Nuestra historia ❤️
-            </p>
+            <span class="footer-text">Nuestra historia ❤️</span>
         </div>
 
         <div class="poem-side">
             <h1>Alexandra</h1>
+            
             <div class="stanza">
                 Tú tan bella y tan delicada, mi <strong>Pan de Dios</strong>,<br>
                 yo tan loco por tus ojos y ese brillo veloz.<br>
                 Me marcaste para siempre como un tattoo,<br>
                 solo quiero una rutina si estás tú.
             </div>
+
             <div class="lyrics-box">
                 "Tú y yo somos como el ying y el yang,<br>
                 Mary Jane y Spider-Man.<br>
                 No se me ocurre mejor plan,<br>
                 que tú y yo, una casa frente al mar."
             </div>
+
             <div class="stanza">
                 Sé que eres <strong>un poco desconfiada</strong>, lo sé bien,<br>
                 pero en tu cabello y tu risa me siento al cien.<br>
