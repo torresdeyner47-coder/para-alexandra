@@ -2,156 +2,168 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Pan de Dios :b</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap');
 
         :root {
             --rosa-fuerte: #ff0a54;
-            --rosa-claro: #ffccd5;
-            --texto-principal: #1a1a1a;
+            --texto-negro: #1a1a1a;
         }
 
         body {
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('foto5.jpg'); 
+            /* Imagen de fondo con una capa oscura para que el texto resalte siempre */
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('foto5.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             font-family: 'Poppins', sans-serif;
             margin: 0;
+            padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow-x: hidden;
+            box-sizing: border-box;
         }
 
-        .main-container {
-            background: rgba(255, 255, 255, 0.95);
-            width: 90%;
-            max-width: 450px; /* Tamaño ideal para móvil */
-            border-radius: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-            overflow: hidden;
-            position: relative;
-            margin: 20px auto;
-            animation: fadeIn 1s ease-out;
-        }
-
-        /* --- INTERACTIVIDAD FOTOS --- */
-        .visual-side {
-            padding: 20px;
-            background: linear-gradient(to bottom, #fff0f3, #ffffff);
-            text-align: center;
-        }
-
-        .photo-stack {
+        .container {
+            background: rgba(255, 255, 255, 0.98);
+            width: 100%;
+            max-width: 800px; /* Ancho máximo para PC */
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
             display: flex;
-            justify-content: center;
+            flex-direction: column; /* Por defecto para móvil */
+            overflow: hidden;
+            animation: entrada 0.8s ease-out;
+        }
+
+        @keyframes entrada {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- SECCIÓN DE IMÁGENES --- */
+        .visual-section {
+            background: #fff0f3;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 2px dashed var(--rosa-fuerte);
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 10px;
-            perspective: 1000px;
+            width: 100%;
         }
 
         .user-photo {
-            width: 80px;
-            height: 110px;
+            width: 100%;
+            aspect-ratio: 1/1;
             object-fit: cover;
             border-radius: 12px;
             border: 3px solid white;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
             cursor: pointer;
         }
 
-        /* Efecto al tocar la foto */
-        .user-photo:active, .user-photo:hover {
-            transform: scale(1.1) rotate(5deg) translateY(-10px);
-            z-index: 10;
+        .user-photo:hover {
+            transform: scale(1.05) rotate(2deg);
         }
 
-        /* --- CONTENIDO --- */
-        .poem-side {
-            padding: 30px 25px;
+        /* --- SECCIÓN DE TEXTO --- */
+        .content-section {
+            padding: 30px 20px;
             text-align: center;
         }
 
         h1 {
             font-family: 'Dancing Script', cursive;
             color: var(--rosa-fuerte);
-            font-size: 3rem;
-            margin: 0;
+            font-size: clamp(2.5rem, 8vw, 3.5rem); /* Tamaño fluido */
+            margin: 0 0 15px 0;
             cursor: pointer;
-            transition: transform 0.3s ease;
-            display: inline-block;
         }
 
-        h1:active { transform: scale(0.9); }
-
         .stanza {
-            margin: 20px 0;
+            font-size: clamp(1rem, 4vw, 1.15rem);
             line-height: 1.6;
-            color: var(--texto-principal);
-            font-size: 1.05rem;
-            font-weight: 400;
+            color: var(--texto-negro);
+            margin-bottom: 20px;
+            font-weight: 500;
         }
 
         .lyrics-box {
-            background: #fff0f3;
-            border-left: 4px solid var(--rosa-fuerte);
+            background: rgba(255, 10, 84, 0.05);
+            border-left: 5px solid var(--rosa-fuerte);
             padding: 15px;
-            margin: 20px 0;
+            margin: 20px auto;
+            max-width: 90%;
             font-style: italic;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             border-radius: 0 15px 15px 0;
-            color: #444;
+            text-align: left;
         }
 
         strong { color: var(--rosa-fuerte); }
 
-        /* --- CORAZONES ANIMADOS --- */
+        /* --- MEDIA QUERIES PARA PC --- */
+        @media (min-width: 768px) {
+            .container {
+                flex-direction: row; /* En PC se pone de lado */
+                align-items: stretch;
+            }
+            .visual-section {
+                width: 40%;
+                border-bottom: none;
+                border-right: 2px dashed var(--rosa-fuerte);
+                justify-content: center;
+            }
+            .photo-grid {
+                grid-template-columns: 1fr; /* Una foto bajo otra en el lateral */
+            }
+            .user-photo {
+                max-width: 150px;
+            }
+            .content-section {
+                width: 60%;
+                padding: 40px;
+            }
+        }
+
+        /* EFECTO CORAZONES */
         .heart {
             position: fixed;
-            font-size: 20px;
-            color: var(--rosa-fuerte);
-            user-select: none;
             pointer-events: none;
             z-index: 999;
             animation: fall linear forwards;
         }
-
         @keyframes fall {
             to { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Ajuste para pantallas muy pequeñas */
-        @media (max-width: 370px) {
-            h1 { font-size: 2.5rem; }
-            .stanza { font-size: 0.95rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="main-container">
-        <div class="visual-side">
-            <div class="photo-stack">
-                <img src="foto1.jpg" alt="1" class="user-photo">
-                <img src="foto3.jpg" alt="2" class="user-photo">
-                <img src="foto4.jpg" alt="3" class="user-photo">
+    <div class="container">
+        <div class="visual-section">
+            <div class="photo-grid">
+                <img src="foto1.jpg" alt="Foto 1" class="user-photo">
+                <img src="foto3.jpg" alt="Foto 2" class="user-photo">
+                <img src="foto4.jpg" alt="Foto 3" class="user-photo">
             </div>
-            <p style="margin-top: 15px; color: var(--rosa-fuerte); font-weight: 600; font-size: 0.9rem; letter-spacing: 1px;">
-                ¡Toca las fotos! ✨
-            </p>
+            <p style="color: var(--rosa-fuerte); font-weight: bold; margin-top: 10px;">Mi Detallito ❤️</p>
         </div>
 
-        <div class="poem-side">
-            <h1 onclick="createHeartRain()">Alexandra</h1>
+        <div class="content-section">
+            <h1 onclick="lluvia()">Alexandra</h1>
             
             <div class="stanza">
                 Tú tan bella y tan delicada, mi <strong>Pan de Dios</strong>,<br>
@@ -173,25 +185,22 @@
                 Eres la musa de este jugador, mi show favorito,<br>
                 amarte a ti es mi plan más bonito.
             </div>
-            
-            <p style="font-size: 0.8rem; color: #888;">(Toca mi nombre arriba)</p>
+            <p style="font-size: 0.8rem; color: #999;">(Toca mi nombre arriba ✨)</p>
         </div>
     </div>
 
     <script>
-        function createHeartRain() {
-            for (let i = 0; i < 15; i++) {
-                setTimeout(() => {
-                    const heart = document.createElement('div');
-                    heart.classList.add('heart');
-                    heart.innerHTML = '❤️';
-                    heart.style.left = Math.random() * 100 + 'vw';
-                    heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
-                    heart.style.opacity = Math.random();
-                    document.body.appendChild(heart);
-                    
-                    setTimeout(() => heart.remove(), 5000);
-                }, i * 100);
+        function lluvia() {
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = '-5vh';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 4000);
             }
         }
     </script>
