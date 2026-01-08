@@ -2,153 +2,137 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Mi Pan de Dios :b</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap');
 
         :root {
             --rosa-fuerte: #ff0a54;
-            --texto-principal: #000000; /* Negro puro para máxima visibilidad */
-            --texto-secundario: #1a1a1a;
+            --rosa-claro: #ffccd5;
+            --texto-principal: #1a1a1a;
         }
 
         body {
-            background-image: url('foto5.jpg'); 
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('foto5.jpg'); 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             font-family: 'Poppins', sans-serif;
+            margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            margin: 0;
-            padding: 15px;
-            box-sizing: border-box;
+            overflow-x: hidden;
         }
 
         .main-container {
-            background: rgba(255, 255, 255, 0.92); /* Un poco más opaco para leer mejor */
-            display: flex;
-            flex-direction: row;
+            background: rgba(255, 255, 255, 0.95);
+            width: 90%;
+            max-width: 450px; /* Tamaño ideal para móvil */
             border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-            max-width: 900px;
-            width: 100%;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
             overflow: hidden;
-            backdrop-filter: blur(8px);
+            position: relative;
+            margin: 20px auto;
+            animation: fadeIn 1s ease-out;
         }
 
-        /* --- LADO IZQUIERDO: FOTOS --- */
+        /* --- INTERACTIVIDAD FOTOS --- */
         .visual-side {
-            width: 40%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
             padding: 20px;
-            background: rgba(255, 192, 203, 0.2);
-            border-right: 2px dashed var(--rosa-fuerte);
+            background: linear-gradient(to bottom, #fff0f3, #ffffff);
+            text-align: center;
         }
 
         .photo-stack {
             display: flex;
-            flex-direction: column;
-            gap: 15px;
-            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            perspective: 1000px;
         }
 
         .user-photo {
-            width: 150px; 
-            height: 150px;
+            width: 80px;
+            height: 110px;
             object-fit: cover;
-            border-radius: 15px;
-            border: 4px solid white;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            animation: float 4s ease-in-out infinite;
+            border-radius: 12px;
+            border: 3px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
         }
 
-        .p2 { width: 130px; height: 130px; animation-delay: 1s; }
-        .p3 { animation-delay: 2s; }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(2deg); }
+        /* Efecto al tocar la foto */
+        .user-photo:active, .user-photo:hover {
+            transform: scale(1.1) rotate(5deg) translateY(-10px);
+            z-index: 10;
         }
 
-        /* --- LADO DERECHO: POEMA --- */
+        /* --- CONTENIDO --- */
         .poem-side {
-            width: 60%;
-            padding: 40px 30px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            padding: 30px 25px;
             text-align: center;
         }
 
         h1 {
             font-family: 'Dancing Script', cursive;
             color: var(--rosa-fuerte);
-            font-size: 3.5rem;
-            margin: 0 0 15px 0;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            font-size: 3rem;
+            margin: 0;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            display: inline-block;
         }
 
+        h1:active { transform: scale(0.9); }
+
         .stanza {
-            margin-bottom: 20px;
+            margin: 20px 0;
             line-height: 1.6;
             color: var(--texto-principal);
-            font-size: 1.1rem;
-            font-weight: 500; /* Letra un poco más gruesa */
+            font-size: 1.05rem;
+            font-weight: 400;
         }
 
         .lyrics-box {
-            background: rgba(255, 10, 84, 0.08); /* Fondo un poco más visible */
-            border-left: 5px solid var(--rosa-fuerte);
+            background: #fff0f3;
+            border-left: 4px solid var(--rosa-fuerte);
             padding: 15px;
-            margin: 15px 0;
+            margin: 20px 0;
             font-style: italic;
-            font-size: 0.95rem;
-            color: var(--texto-secundario);
-            border-radius: 0 10px 10px 0;
+            font-size: 0.9rem;
+            border-radius: 0 15px 15px 0;
+            color: #444;
         }
 
-        strong { 
-            color: var(--rosa-fuerte); 
-            font-weight: 700;
+        strong { color: var(--rosa-fuerte); }
+
+        /* --- CORAZONES ANIMADOS --- */
+        .heart {
+            position: fixed;
+            font-size: 20px;
+            color: var(--rosa-fuerte);
+            user-select: none;
+            pointer-events: none;
+            z-index: 999;
+            animation: fall linear forwards;
         }
 
-        /* --- AJUSTES PARA CELULAR --- */
-        @media (max-width: 768px) {
-            .main-container {
-                flex-direction: column;
-                margin-top: 20px;
-            }
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
 
-            .visual-side {
-                width: 100%;
-                border-right: none;
-                border-bottom: 2px dashed var(--rosa-fuerte);
-            }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-            .photo-stack {
-                flex-direction: row;
-                flex-wrap: wrap;
-            }
-
-            .user-photo {
-                width: 100px;
-                height: 100px;
-            }
-
-            .poem-side {
-                width: 100%;
-                padding: 25px;
-            }
-
-            h1 { font-size: 2.8rem; }
-            .stanza { font-size: 1rem; }
+        /* Ajuste para pantallas muy pequeñas */
+        @media (max-width: 370px) {
+            h1 { font-size: 2.5rem; }
+            .stanza { font-size: 0.95rem; }
         }
     </style>
 </head>
@@ -157,37 +141,59 @@
     <div class="main-container">
         <div class="visual-side">
             <div class="photo-stack">
-                <img src="foto1.jpg" alt="Alexandra 1" class="user-photo p1">
-                <img src="foto3.jpg" alt="Alexandra 2" class="user-photo p2">
-                <img src="foto4.jpg" alt="Alexandra 3" class="user-photo p3">
+                <img src="foto1.jpg" alt="1" class="user-photo">
+                <img src="foto3.jpg" alt="2" class="user-photo">
+                <img src="foto4.jpg" alt="3" class="user-photo">
             </div>
-            <p style="margin-top: 15px; color: var(--rosa-fuerte); font-weight: bold; font-size: 1rem;">
-                Mi Detallito ❤️
+            <p style="margin-top: 15px; color: var(--rosa-fuerte); font-weight: 600; font-size: 0.9rem; letter-spacing: 1px;">
+                ¡Toca las fotos! ✨
             </p>
         </div>
 
         <div class="poem-side">
-            <h1>Alexandra</h1>
+            <h1 onclick="createHeartRain()">Alexandra</h1>
+            
             <div class="stanza">
                 Tú tan bella y tan delicada, mi <strong>Pan de Dios</strong>,<br>
                 yo tan loco por tus ojos y ese brillo veloz.<br>
                 Me marcaste para siempre como un tattoo,<br>
                 solo quiero una rutina si estás tú.
             </div>
+
             <div class="lyrics-box">
                 "Tú y yo somos como el ying y el yang,<br>
                 Mary Jane y Spider-Man.<br>
                 No se me ocurre mejor plan,<br>
                 que tú y yo, una casa frente al mar."
             </div>
+
             <div class="stanza">
                 Sé que eres <strong>un poco desconfiada</strong>, lo sé bien,<br>
                 pero en tu cabello y tu risa me siento al cien.<br>
                 Eres la musa de este jugador, mi show favorito,<br>
-                amarte a ti, Alexandra, es mi plan más bonito.
+                amarte a ti es mi plan más bonito.
             </div>
+            
+            <p style="font-size: 0.8rem; color: #888;">(Toca mi nombre arriba)</p>
         </div>
     </div>
 
+    <script>
+        function createHeartRain() {
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.classList.add('heart');
+                    heart.innerHTML = '❤️';
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                    heart.style.opacity = Math.random();
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => heart.remove(), 5000);
+                }, i * 100);
+            }
+        }
+    </script>
 </body>
 </html>
